@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://crmgv4oqqibg4"]
+[gd_scene load_steps=12 format=3 uid="uid://crmgv4oqqibg4"]
 
 [ext_resource type="Texture2D" uid="uid://c0c84gjme00fq" path="res://assets/character/Idle1.png" id="1_pgram"]
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_rekm7"]
+[ext_resource type="Texture2D" uid="uid://dsyoi6xl4iggw" path="res://icon.svg" id="3_i3r4p"]
+[ext_resource type="Script" path="res://scenes/flashgun.gd" id="4_4b8it"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g3rd1"]
 atlas = ExtResource("1_pgram")
@@ -42,7 +44,12 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eyt4x"]
 radius = 5.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7opum"]
+size = Vector2(98.1982, 84.85)
+
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 15
+collision_mask = 15
 script = ExtResource("1_rekm7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -55,3 +62,22 @@ frame_progress = 0.627937
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, -15)
 shape = SubResource("CapsuleShape2D_eyt4x")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(45, -16)
+scale = Vector2(0.773945, 0.223925)
+color = Color(1, 1, 0.411765, 1)
+energy = 3.92
+texture = ExtResource("3_i3r4p")
+texture_scale = 0.77
+script = ExtResource("4_4b8it")
+
+[node name="Area2D" type="Area2D" parent="PointLight2D"]
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PointLight2D/Area2D"]
+position = Vector2(-1.29209, 2.23289)
+shape = SubResource("RectangleShape2D_7opum")
+
+[connection signal="body_entered" from="PointLight2D/Area2D" to="PointLight2D" method="_on_area_2d_body_entered"]
