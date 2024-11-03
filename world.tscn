@@ -1,9 +1,31 @@
-[gd_scene load_steps=2 format=3 uid="uid://ctj43ohommhvl"]
+[gd_scene load_steps=5 format=3 uid="uid://ctj43ohommhvl"]
 
 [ext_resource type="Texture2D" uid="uid://cn0nnp0xv82m2" path="res://Tile_01.png" id="1_g08pv"]
+[ext_resource type="Texture2D" uid="uid://cf2mohiyjj5ec" path="res://Tileset.png" id="2_2an4v"]
+[ext_resource type="PackedScene" uid="uid://crmgv4oqqibg4" path="res://scenes/player.tscn" id="3_hpxjr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_scdq4"]
+size = Vector2(322, 20)
 
 [node name="World" type="Node2D"]
 
 [node name="Tile01" type="Sprite2D" parent="."]
-position = Vector2(38, 55)
+position = Vector2(48, 97)
 texture = ExtResource("1_g08pv")
+
+[node name="Tile02" type="Sprite2D" parent="."]
+position = Vector2(121, 87)
+texture = ExtResource("1_g08pv")
+
+[node name="Tileset" type="Sprite2D" parent="."]
+position = Vector2(147, 158)
+texture = ExtResource("2_2an4v")
+
+[node name="Player" parent="." instance=ExtResource("3_hpxjr")]
+position = Vector2(159, 78)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(159, 89)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_scdq4")
