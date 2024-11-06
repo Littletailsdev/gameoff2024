@@ -1,7 +1,6 @@
-[gd_scene load_steps=33 format=3 uid="uid://crmgv4oqqibg4"]
+[gd_scene load_steps=32 format=3 uid="uid://crmgv4oqqibg4"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_rekm7"]
-[ext_resource type="Script" path="res://scripts/animal.gd" id="2_ve3of"]
 [ext_resource type="Texture2D" uid="uid://drmbs8shjfvyc" path="res://assets/Player/Dog/Idle.png" id="2_y54gm"]
 [ext_resource type="Texture2D" uid="uid://ccbwtasm43suh" path="res://assets/Player/Dog/Walk.png" id="4_xouju"]
 [ext_resource type="Texture2D" uid="uid://bac6bls6mqxgk" path="res://assets/Player/Cat/Idle.png" id="5_b41iu"]
@@ -188,27 +187,25 @@ animations = [{
 "speed": 14.0
 }]
 
-[node name="Player" type="Node2D"]
-script = ExtResource("1_rekm7")
-
-[node name="Dog" type="CharacterBody2D" parent="."]
-light_mask = 3
-visibility_layer = 3
+[node name="Player" type="CharacterBody2D"]
 collision_layer = 15
 collision_mask = 15
-script = ExtResource("2_ve3of")
+script = ExtResource("1_rekm7")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Dog"]
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+
+[node name="DogCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -12)
 shape = SubResource("CapsuleShape2D_eyt4x")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Dog"]
+[node name="DogSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(4, -24)
 sprite_frames = SubResource("SpriteFrames_high3")
 animation = &"Walking"
 autoplay = "Idle"
 
-[node name="PointLight2D" type="PointLight2D" parent="Dog"]
+[node name="DogLight" type="PointLight2D" parent="."]
 light_mask = 3
 visibility_layer = 3
 position = Vector2(-0.11344, -12.2346)
@@ -217,23 +214,20 @@ energy = 0.0
 range_item_cull_mask = 3
 texture = SubResource("GradientTexture2D_txjli")
 
-[node name="Cat" type="CharacterBody2D" parent="."]
+[node name="CatCollision" type="CollisionShape2D" parent="."]
 visible = false
-collision_layer = 15
-collision_mask = 15
-script = ExtResource("2_ve3of")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Cat"]
 position = Vector2(0, -10)
 shape = SubResource("CircleShape2D_mnymf")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Cat"]
+[node name="CatSprite" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(4, -24)
 sprite_frames = SubResource("SpriteFrames_vocig")
 animation = &"Walking"
 frame_progress = 0.916432
 
-[node name="PointLight2D2" type="PointLight2D" parent="Cat"]
+[node name="CatLight" type="PointLight2D" parent="."]
+visible = false
 light_mask = 7
 visibility_layer = 7
 position = Vector2(-0.11344, -12.2346)
@@ -241,10 +235,3 @@ scale = Vector2(2.56605, 2.00733)
 energy = 0.0
 range_item_cull_mask = 4
 texture = SubResource("GradientTexture2D_txjli")
-
-[node name="Rat" type="CharacterBody2D" parent="."]
-
-[node name="Bird" type="CharacterBody2D" parent="."]
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position_smoothing_enabled = true
